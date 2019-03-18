@@ -13,15 +13,16 @@ type Player struct {
 }
 
 // NewPlayer returns a configured player object
-func NewPlayer() Player {
+func NewPlayer(x float64, y float64) Player {
 	// Create a geom for the player and initalise location
 	playerGeom := ebiten.GeoM{}
-	playerGeom.Apply(2.0, 3.0)
+	playerGeom.Translate(x, y)
 
 	drawOpts := ebiten.DrawImageOptions{GeoM: playerGeom}
 
 	p, _ := ebiten.NewImage(100, 100, ebiten.FilterDefault)
 	p.Fill(color.White)
+
 	controller := Controller{&drawOpts.GeoM}
 	return Player{&Entity{p, &drawOpts.GeoM, &Collider{}, &drawOpts}, &controller}
 }

@@ -10,14 +10,16 @@ import (
 
 // Game struct
 type Game struct {
-	p   Player
-	g   *Graphics
-	img *ebiten.Image
+	p      Player
+	g      *Graphics
+	img    *ebiten.Image
+	target *Entity
 }
 
 //NewGame returns a new game struct
 func NewGame() Game {
-	return Game{p: NewPlayer(), g: &Graphics{800, 600}}
+
+	return Game{p: NewPlayer(0, 0), g: &Graphics{800, 600}, target: NewEntity(300.0, 300.0)}
 }
 
 //Start begins game logic
@@ -37,8 +39,17 @@ func (g *Game) update(screen *ebiten.Image) error {
 	screen.DrawImage(img, &ebiten.DrawImageOptions{})
 
 	screen.DrawImage(g.p.Image, g.p.DrawImageOptions)
+	screen.DrawImage(g.target.Image, g.target.DrawImageOptions)
 
 	title := "3mm4"
 	ebitenutil.DebugPrint(screen, title)
+	g.checkColliders()
 	return nil
+}
+func (g *Game) checkColliders() {
+	collided := color.RGBA64{0, 255, 255, 255}
+	if g.p.Collider.Intersects(g.target.Collider) {
+		log.Printf("Collided Game:")
+		g.p.SetColor(collided)
+	}
 }

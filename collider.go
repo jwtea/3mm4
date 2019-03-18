@@ -1,11 +1,12 @@
 package main
 
-// Collider
+// Collider @todo should this take reference to the collider that its touching
 type Collider struct {
-	x float64
-	y float64
-	w float64
-	h float64
+	x         float64
+	y         float64
+	w         float64
+	h         float64
+	colliding bool
 }
 
 // Intersects checks the x and y value for intersection to passed collider

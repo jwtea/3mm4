@@ -34,7 +34,6 @@ func (c *Controller) HandleInputs() {
 
 // Up apply translate to geom target x-,y-10
 func (c *Controller) Up() {
-	log.Println("Up")
 	c.Target.Translate(0, -10)
 }
 

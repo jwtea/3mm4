@@ -19,7 +19,7 @@ func (c *Collider) Intersects(ac *Collider) bool {
 
 // IntersectsX checks for the width intersecting the x value of the passed collider
 func (c *Collider) IntersectsX(ac *Collider) bool {
-	if c.x+c.w >= ac.x {
+	if c.x+c.w >= ac.x && c.x <= ac.x+ac.w {
 		return true
 	}
 
@@ -28,9 +28,14 @@ func (c *Collider) IntersectsX(ac *Collider) bool {
 
 // IntersectsY checks for the width intersecting the y value of the passed collider
 func (c *Collider) IntersectsY(ac *Collider) bool {
-	if c.y+c.h >= ac.y {
+	if c.y+c.h >= ac.y && c.y <= ac.y+ac.h {
 		return true
 	}
 
 	return false
+}
+
+func (c *Collider) Translate(x float64, y float64) {
+	c.x += x
+	c.y += y
 }

@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"image/color"
 	"log"
+	"math/rand"
 
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/ebitenutil"
@@ -18,7 +20,6 @@ type Game struct {
 
 //NewGame returns a new game struct
 func NewGame() Game {
-
 	return Game{p: NewPlayer(0, 0), g: &Graphics{800, 600}, target: NewEntity(300.0, 300.0)}
 }
 
@@ -35,21 +36,27 @@ func (g *Game) update(screen *ebiten.Image) error {
 
 	// Background
 	img, _ := ebiten.NewImage(g.g.Height, g.g.Width, ebiten.FilterDefault)
+
 	img.Fill(color.Black)
 	screen.DrawImage(img, &ebiten.DrawImageOptions{})
 
-	screen.DrawImage(g.p.Image, g.p.DrawImageOptions)
-	screen.DrawImage(g.target.Image, g.target.DrawImageOptions)
+	screen.DrawImage(g.p.Image, g.p.DrawOpts)
+	screen.DrawImage(g.target.Image, g.target.DrawOpts)
 
-	title := "3mm4"
-	ebitenutil.DebugPrint(screen, title)
+	ebitenutil.DebugPrint(screen, fmt.Sprintf("3mm4: %0.2f", ebiten.CurrentTPS()))
+
 	g.checkColliders()
 	return nil
 }
 func (g *Game) checkColliders() {
-	collided := color.RGBA64{0, 255, 255, 255}
+	collided := color.RGBA{
+		byte(rand.Intn(256)),
+		byte(rand.Intn(256)),
+		byte(rand.Intn(256)),
+		byte(0xff),
+	}
 	if g.p.Collider.Intersects(g.target.Collider) {
-		log.Printf("Collided Game:")
+		log.Printf("Has intersected")
 		g.p.SetColor(collided)
 	}
 }

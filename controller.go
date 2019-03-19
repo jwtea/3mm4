@@ -8,7 +8,7 @@ import (
 
 //Controller contains a target GeoM and movements to apply
 type Controller struct {
-	Target *ebiten.GeoM
+	Target *Entity
 }
 
 // HandleUpPress returns wether the user has pressed down up

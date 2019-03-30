@@ -24,7 +24,7 @@ func NewEntity(x float64, y float64) *Entity {
 	e, _ := ebiten.NewImage(100, 100, ebiten.FilterDefault)
 	e.Fill(color.White)
 
-	return &Entity{e, &drawOpts.GeoM, &Collider{x: x, y: y, w: 100, h: 100}, &drawOpts}
+	return &Entity{e, &drawOpts.GeoM, &Collider{x: x, y: y, w: 100, h: 100, col: &Collision{false, false, false, false}}, &drawOpts}
 }
 
 func (e *Entity) Translate(x float64, y float64) {

@@ -26,8 +26,6 @@ func NewGame() Game {
 //Start begins game logic
 func (g *Game) Start() {
 	log.Printf("Starting Game")
-
-	//@too move to graphics
 	ebiten.Run(g.update, g.g.Height, g.g.Width, 2, "3mm4")
 }
 
@@ -48,6 +46,7 @@ func (g *Game) update(screen *ebiten.Image) error {
 	g.checkColliders()
 	return nil
 }
+
 func (g *Game) checkColliders() {
 	collided := color.RGBA{
 		byte(rand.Intn(256)),
@@ -56,7 +55,6 @@ func (g *Game) checkColliders() {
 		byte(0xff),
 	}
 	if g.p.Collider.Intersects(g.target.Collider) {
-		log.Printf("Has intersected")
 		g.p.SetColor(collided)
 	}
 }

@@ -22,7 +22,12 @@ func NewPlayer(x float64, y float64) Player {
 
 	p, _ := ebiten.NewImage(100, 100, ebiten.FilterDefault)
 	p.Fill(color.White)
-	pEntity := &Entity{p, &drawOpts.GeoM, &Collider{x: x, y: y, w: 100, h: 100, col: &Collision{false, false, false, false}}, &drawOpts}
+	pEntity := &Entity{p,
+		&drawOpts.GeoM,
+		&Collider{x: x, y: y, w: 100, h: 100, col: &Collision{false, false, false, false}},
+		&drawOpts,
+		&History{},
+	}
 	controller := Controller{pEntity}
 
 	return Player{pEntity, &controller}

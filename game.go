@@ -41,6 +41,9 @@ func (g *Game) update(screen *ebiten.Image) error {
 
 	ebitenutil.DebugPrint(screen, fmt.Sprintf("3mm4: %0.2f", ebiten.CurrentTPS()))
 
+	//@todo check if history needs rewinding
+
+	g.p.Entity.History.PrintDebug()
 	g.checkColliders()
 	return nil
 }
@@ -52,7 +55,9 @@ func (g *Game) checkColliders() {
 		byte(rand.Intn(256)),
 		byte(0xff),
 	}
+
 	if g.p.Collider.Intersects(g.target.Collider) {
+		//@todo should history be applied here?
 		g.p.SetColor(collided)
 	}
 }

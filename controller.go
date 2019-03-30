@@ -34,6 +34,8 @@ func (c *Controller) HandleInputs() {
 
 // Up apply translate to geom target x-,y-10
 func (c *Controller) Up() {
+
+	c.Target.Collider.col.PrintDebug()
 	c.Target.Translate(0, -10)
 }
 

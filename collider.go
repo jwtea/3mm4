@@ -79,7 +79,7 @@ func (c *Collider) collideTop(ac *Collider) {
 }
 
 func (c *Collider) collideBottom(ac *Collider) {
-	if (c.y+c.h >= ac.y && c.y <= ac.y+ac.h) && c.IntersectsX(ac) {
+	if (c.y+c.h >= ac.y && c.y+c.h <= ac.y+ac.h) && c.IntersectsX(ac) {
 		c.col.SetBottom(true)
 	} else {
 		c.col.SetBottom(false)
@@ -93,21 +93,24 @@ func (c *Collider) Translate(x float64, y float64) {
 }
 
 func (c *Collision) SetTop(b bool) {
-	log.Printf("Setting top: %v", b)
 	c.top = b
 }
 
 func (c *Collision) SetRight(b bool) {
-	log.Printf("Setting right: %v", b)
 	c.right = b
 }
 
 func (c *Collision) SetBottom(b bool) {
-	log.Printf("Setting Bottom: %v", b)
 	c.bottom = b
 }
 
 func (c *Collision) SetLeft(b bool) {
-	log.Printf("Setting left: %v", b)
 	c.left = b
+}
+
+func (c *Collision) PrintDebug() {
+	log.Printf("T: %v ", c.top)
+	log.Printf("R: %v", c.right)
+	log.Printf("B: %v", c.bottom)
+	log.Printf("L: %v", c.left)
 }

@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"image/color"
-	"log"
 	"math/rand"
 
 	"github.com/hajimehoshi/ebiten"
@@ -25,7 +24,6 @@ func NewGame() Game {
 
 //Start begins game logic
 func (g *Game) Start() {
-	log.Printf("Starting Game")
 	ebiten.Run(g.update, g.g.Height, g.g.Width, 2, "3mm4")
 }
 

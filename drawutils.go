@@ -1,6 +1,8 @@
 package main
 
 import (
+	"image/color"
+
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/ebitenutil"
 )
@@ -86,4 +88,24 @@ func drawRect(canvas *ebiten.Image, img *ebiten.Image, x, y, width, height float
 	canvas.DrawTriangles(vs, []uint16{0, 1, 2, 1, 2, 3}, img, op)
 
 	ebitenutil.DebugPrintAt(canvas, msg, int(x), int(y)-16)
+}
+
+//DrawGrid Show a grid on screen
+func DrawGrid(canvas *ebiten.Image, width int, height int, sections int) {
+	//Draw vertical
+	for i := 0; i < sections; i++ {
+		vO := (width / sections) * i
+		hO := (height / sections) * i
+		ebitenutil.DrawLine(
+			canvas,
+			float64(vO), 0,
+			float64(vO), float64(height),
+			color.White)
+
+		ebitenutil.DrawLine(
+			canvas,
+			0, float64(hO),
+			float64(width), float64(hO),
+			color.White)
+	}
 }
